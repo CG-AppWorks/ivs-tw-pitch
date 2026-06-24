@@ -469,7 +469,11 @@ function LiveCaptionsWidget({ sessionId = 'DXRS-1194', captionLanguage = 'zh-TW'
           <button className="ddcap-x" onClick={() => setOpen(false)} aria-label="Close captions">×</button>
         </div>
         <div className="ddcap-body">
-          <CaptionsLive language={captionLanguage} sessionId={sessionId} />
+          {/^https?:/.test(worker)
+            ? <iframe className="ddcap-frame" style={{ width: '100%', height: '100%', border: 0, background: '#0b0d10' }}
+                src={worker + '/viewer?base=' + encodeURIComponent(worker) + '&sec=' + encodeURIComponent((window.EVENT_CONFIG && window.EVENT_CONFIG.captionsLang === 'ja') ? '日本語' : '中')}
+                title="Live captions" allow="autoplay" loading="lazy" />
+            : <CaptionsLive language={captionLanguage} sessionId={sessionId} />}
         </div>
       </div>}
       <button className={`ddcap-fab ${open ? 'on' : ''}`} onClick={() => setOpen((o) => !o)} aria-expanded={open}>

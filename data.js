@@ -107,8 +107,10 @@ window.EVENT_CONFIG = {
   heroVenueShort: 'UP2-5',
   heroVenueSub: 'Miyako Messe',
   heroTeamsNote: '15 AppWorks · 4 Wistron',
-  // Live caption engine — Gemini live translation (browser Speech Recognition
-  // → Gemini API). Any truthy value enables the floating widget; the panel
-  // gates on a Gemini API key entered + stored in the browser.
-  captionsWorker: 'gemini',
+  // Live caption engine — server-side via the shared Cloudflare Worker (same
+  // API/keys as the previous edition). One operator triggers translation from
+  // the broadcaster page (/broadcast?lang=ja); guests just watch. The worker
+  // outputs EN + Japanese for this edition.
+  captionsWorker: 'https://ddtw-captions.hsichun.workers.dev',
+  captionsLang: 'ja',          // secondary caption language for the viewer
 };
