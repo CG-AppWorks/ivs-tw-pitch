@@ -100,7 +100,7 @@ window.EVENT_CONFIG = {
   wordly: true,       // AI live interpretation
   album: false,        // live photo album — link only
   wistron: true,      // WA#10 cohort + partners section
-  keyVisual: true,    // IVS 2026 key visual banner
+  keyVisual: false,   // IVS 2026 key visual banner — set true once assets/ivs-hero.jpg is added
   nowOnStage: false,  // captions live in the floating widget, not an inline page strip
   heroDate: 'July 2nd',
   heroTime: 'Thu · 17:00–18:00',
