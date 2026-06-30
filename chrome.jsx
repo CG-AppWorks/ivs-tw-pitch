@@ -182,7 +182,7 @@ function Hero({ variant = 'photo', language, kpis }) {
         {(language === 'en' || language === 'both') && enLede}
         {(language === 'zh' || language === 'both') &&
         <p className="lede zh zh-line center">
-            AI とアジアの越境スタートアップのための祭典 — 厳選された {kpis.teams} チームが登壇。<br />AppWorks #32 から 15 チーム、Wistron #10 から 4 チームが東京に集い、世界とつながります。
+            IVS 2026 唯一の台湾フォーカス・ピッチセッション — アジア全域へ展開する、台湾で最も成長著しい <b>{kpis.teams} 社</b>のスタートアップ。カスタマーサービスエージェントから EV ソフトウェア、越境ロジスティクスまで、AI を活用したプロダクトで実社会にインパクトを生み出します。
           </p>
         }
         {CFG.heroGuest &&
