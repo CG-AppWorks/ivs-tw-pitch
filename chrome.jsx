@@ -153,7 +153,7 @@ function Hero({ variant = 'photo', language, kpis }) {
   const venue = CFG.venue || 'Taipei Marriott Hotel · 5F Grand Ballroom';
   const wistron = CFG.wistron !== false;
   const enLede = wistron ?
-  <p className="lede center">The only Taiwan-centric pitch session at <b>IVS 2026</b> — <b>9 of Taiwan's fastest-growing startups</b> scaling across Asia with AI-powered products making real-world impact, from customer service agents to EV software to cross-border logistics.</p> :
+  <p className="lede center"><b>The only Taiwan-focused pitch session at IVS 2026.</b> Nine of Taiwan's fastest-growing startups, scaling across Asia, take the stage! From customer-service AI to EV (electric vehicle) software to cross-border logistics, they showcase cutting-edge AI products making real-world impact. Come see the innovative pitches powering their global expansion.</p> :
   <p className="lede center"><b>{kpis.teams} selected startups,</b> the <b>AppWorks #32</b> cohort -<br />Founders from Taiwan, Singapore, Korea, Malaysia, Hong Kong and the US,<br />working at the forefront of <b>Enterprise AI</b>, <b>Manufacturing AI</b>, <b>Web3</b> and <b>Dual-Use Tech</b>.</p>;
 
   return (
@@ -182,7 +182,7 @@ function Hero({ variant = 'photo', language, kpis }) {
         {(language === 'en' || language === 'both') && enLede}
         {(language === 'zh' || language === 'both') &&
         <p className="lede zh zh-line center">
-            IVS 2026 唯一の台湾フォーカス・ピッチセッション — アジア全域へ展開する、台湾で最も成長著しい <b>{kpis.teams} 社</b>のスタートアップ。カスタマーサービスエージェントから EV ソフトウェア、越境ロジスティクスまで、AI を活用したプロダクトで実社会にインパクトを生み出します。
+            <b>【IVS 2026 唯一の台湾特化型ピッチセッション】</b> アジア全域で急成長を遂げる、台湾の注目スタートアップ9社が登壇！カスタマーサービスAIからEV（電気自動車）向けソフトウェア、クロスボーダー物流まで、実社会に大きなインパクトを与える最先端のAIプロダクトを披露します。グローバル展開を加速させる彼らの革新的なピッチをぜひご覧ください。
           </p>
         }
         {CFG.heroGuest &&
