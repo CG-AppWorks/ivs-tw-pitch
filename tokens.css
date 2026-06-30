@@ -217,45 +217,40 @@ a:hover, .aw-link:hover {
 
 
 /* ════════════════════════════════════════════════════════════════
-   TAIWAN IN MOTION — dark cinematic theme
-   Recolored from the event key visual (deep navy night sky,
-   orange light-trails, white headline). Brand orange is preserved.
+   TAIWAN IN MOTION — light theme
+   Back to the AppWorks light base (white / warm bone), while keeping
+   the brand orange that ties the page to the event key visual.
    These :root overrides come last, so they win for equal specificity.
    ════════════════════════════════════════════════════════════════ */
 :root {
-  /* deep navy-black base pulled from the key-visual sky */
-  --bg: #0A0E15;
-  --bg-alt: #11161F;
-  --bg-warm: #15120E;            /* warm-tinted dark for 'bone' sections */
-  --bg-inverse: #05080D;
+  /* light base — airy white with warm neutrals */
+  --bg: var(--aw-white);
+  --bg-alt: var(--aw-mist);
+  --bg-warm: var(--aw-bone);
+  --bg-inverse: var(--aw-slate);
 
   /* elevated surfaces for cards / panels / inputs */
-  --surface: #141A23;
-  --surface-2: #1C242F;
-  --panel-dark: #070A11;         /* deepest panel (footer, dark fills) */
+  --surface: #FFFFFF;
+  --surface-2: #F4F6F8;
+  --panel-dark: #424F57;         /* slate for dark fills (footer, inverse) */
 
-  /* light type on dark */
-  --fg1: #EEF1F5;
-  --fg2: #9BA6B2;
+  /* dark type on light */
+  --fg1: var(--aw-slate);
+  --fg2: var(--aw-grey);
   --fg-inverse: #FFFFFF;
   --fg-muted-inverse: rgba(255,255,255,0.7);
 
-  /* brand orange — unchanged hero color; lighten on hover for dark */
+  /* brand orange — the key-visual hero color, preserved */
   --accent: #FF6B0F;
-  --accent-hover: #FF8A3D;
+  --accent-hover: #E65E00;
 
-  /* hairlines + washes for dark */
-  --border: rgba(255,255,255,0.10);
-  --border-strong: rgba(255,255,255,0.18);
-  --rule: rgba(255,255,255,0.07);
-  --aw-orange-wash: rgba(255,107,15,0.15);
+  /* hairlines + washes for light */
+  --border: var(--aw-mist);
+  --border-strong: rgba(66,79,87,0.18);
+  --rule: rgba(66,79,87,0.08);
+  --aw-orange-wash: #FFF1E6;
 
-  /* keep brand greys legible against the dark base */
-  --aw-grey: #8B95A0;
-  --aw-grey-60: #6B7480;
-  --aw-slate-70: #97A2AD;
-
-  /* shadows become true black for depth on dark */
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.45), 0 1px 1px rgba(0,0,0,.30);
-  --shadow-md: 0 10px 30px rgba(0,0,0,.55), 0 2px 8px rgba(0,0,0,.40);
+  /* shadows back to soft warm-grey for light surfaces */
+  --shadow-sm: 0 1px 2px rgba(66,79,87,.06), 0 1px 1px rgba(66,79,87,.04);
+  --shadow-md: 0 8px 24px rgba(66,79,87,.08), 0 2px 6px rgba(66,79,87,.04);
 }

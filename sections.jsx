@@ -362,9 +362,10 @@ Could we set up a 30-minute chat in the next two weeks?
 Best,
 (via Taiwan Startup Pitch Session at IVS)`;
 
-  const mailto = `mailto:${team.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const ccParam = team.cc ? `cc=${encodeURIComponent(team.cc)}&` : '';
+  const mailto = `mailto:${team.email}?${ccParam}subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   const copy = () => {
-    navigator.clipboard?.writeText(`To: ${team.email}\nSubject: ${subject}\n\n${body}`);
+    navigator.clipboard?.writeText(`To: ${team.email}\n${team.cc ? `Cc: ${team.cc}\n` : ''}Subject: ${subject}\n\n${body}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
@@ -381,6 +382,11 @@ Best,
             <label>To</label>
             <div className="field">{team.email}</div>
           </div>
+          {team.cc &&
+          <div>
+            <label>Cc</label>
+            <div className="field">{team.cc}</div>
+          </div>}
           <div>
             <label>Subject</label>
             <div className="field">{subject}</div>

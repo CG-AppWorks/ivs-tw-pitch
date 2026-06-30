@@ -211,7 +211,7 @@ async function geminiTranslate(key, text, targetLabel) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: 256, thinkingConfig: { thinkingBudget: 0 } },
+      generationConfig: { temperature: 0.2, maxOutputTokens: 256 },
     }),
   });
   if (!res.ok) {

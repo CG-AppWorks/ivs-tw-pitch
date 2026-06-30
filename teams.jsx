@@ -9,7 +9,17 @@ const FLAG = { TW:"🇹🇼", SG:"🇸🇬", KR:"🇰🇷", MY:"🇲🇾", US:"�
 
 // Team logo lockups, keyed by team id. Empty in this baseline → every card
 // falls back to the order/initials box. Add 'id:"assets/logos/x.png"' to use art.
-const LOGOS = {};
+const LOGOS = {
+  gntc:      "assets/logos/gntc.png",
+  voiss:     "assets/logos/voiss.png",
+  raccoon:   "assets/logos/raccoon.svg",
+  luggagent: "assets/logos/luggagent.png",
+  returnhelper:"assets/logos/returnhelper.png",
+  omnichat:  "assets/logos/omnichat.png",
+  cake:      "assets/logos/cake.png",
+  barkingdog:"assets/logos/barkingdog.png",
+  kopherbit: "assets/logos/kopherbit.png",
+};
 
 // Founder portraits, keyed by team id. Empty in this baseline → every card
 // falls back to the HQ flag glyph. Add 'id:"assets/portraits/x.jpg"' to use art.
@@ -165,7 +175,7 @@ function FilterBar({ filter, setFilter, search, setSearch }) {
       <div className="search">
         <I.search/>
         <input
-          placeholder="Search teams, founders, sectors — e.g. 'agentic AI', 'maritime', 'voice'…"
+          placeholder="Search teams, founders, sectors — e.g. 'agentic AI', 'voice', 'HR', 'EV'…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

@@ -1,4 +1,4 @@
-# Demo Day Tokyo — AppWorks #32 + Wistron #10
+# IVS 2026 — Taiwan Startup Pitch Session (Kyoto)
 
 Bilingual (English / 日本語) event landing site: team directory, agenda, About,
 Wistron, booth map, live audience panel, and a **Gemini-powered live caption /
@@ -16,6 +16,8 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
+Or just push to **GitHub Pages** and it runs as-is.
+
 ## Files
 
 | File | Purpose |
@@ -24,13 +26,13 @@ python3 -m http.server 8000
 | `data.js` | Lineup, agenda, Japanese copy, and `EVENT_CONFIG` (edit to retarget). |
 | `app.jsx` | Top-level app + Tweaks panel wiring. |
 | `chrome.jsx` | Top nav, hero, footer, caption helpers. |
-| `sections.jsx` | Agenda, Album, About, Wistron, Sponsors, booth map. |
-| `teams.jsx` | Team directory (filters, cards). Logos/portraits fall back to placeholders — fill the `LOGOS` / `PORTRAITS` maps to use real art. |
+| `sections.jsx` | Agenda, Album, About, Wistron, Sponsors, booth map, perks. |
+| `teams.jsx` | Team directory (filters, cards). Team logos live in `assets/logos/`; missing ones fall back to an initials box. |
 | `live.jsx` | Live audience panel + **Gemini live-translation captions**. |
 | `backstage.jsx` | Operator console (open via the footer 🔒 / `#backstage`). |
 | `tweaks-panel.jsx` | Design-time tweak controls. |
 | `styles.css` / `tokens.css` | Layout styles + AppWorks design tokens. |
-| `assets/` | A-mark favicon + placeholder sponsor logos. |
+| `assets/` | A-mark favicon, hero key visual, sponsor + team logos. |
 
 ## Live captions (Gemini)
 
@@ -48,5 +50,11 @@ Gemini API (`gemini-2.0-flash`).
 
 Most event-specific content lives in `data.js`: the `TEAMS` array, `AGENDA`,
 the Japanese `ZH` copy block, and `EVENT_CONFIG` (city, venue, dates, feature
-flags). Swap real images into `assets/` and reference them from the `LOGOS` /
-`PORTRAITS` maps in `teams.jsx`.
+flags). Drop logos into `assets/logos/` and key them by team id in the `LOGOS`
+map in `teams.jsx`.
+
+## Notes
+
+- The perks/partner section only renders on the `TW` edition; this build is the
+  `JP` edition, so its partner logos (`assets/logos/partner-*.png`) are not
+  required and aren't included.

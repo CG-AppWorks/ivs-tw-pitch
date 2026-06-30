@@ -195,16 +195,18 @@ function Hero({ variant = 'photo', language, kpis }) {
         <div className="hero-meta">
           <div className="item">
             <div className="k">{language === 'zh' ? '日付' : 'Date'}</div>
-            <div className="v">{CFG.heroDate || 'July 2nd'}<small>{CFG.heroTime || 'Thu · 17:00–18:00'}</small></div>
+            <div className="v">{CFG.heroDate || 'July 2nd'}</div>
+            <div className="item-note">{CFG.heroTime || 'Thu · 17:00–18:00'}</div>
           </div>
           <div className="item">
             <div className="k">{language === 'zh' ? '会場' : 'Stage'}</div>
-            <div className="v">{CFG.heroVenueShort || 'UP2-5'}<small>{CFG.heroVenueSub || ''}</small></div>
+            <div className="v">{CFG.heroVenueShort || 'UP2-5'}</div>
+            <div className="item-note">{CFG.heroVenueSub || ''}</div>
           </div>
           <div className="item">
             <div className="k">{tr(language, 'Teams', 'チーム')}</div>
             <div className="v"><span className="num">9</span></div>
-            <div className="item-note">{tr(language, 'From Taiwan, scaling in Japan and across Asia.', '台湾発、日本そしてアジアへ。')}</div>
+            <div className="item-note">{tr(language, 'From TW, scaling in JP & Asia', '台湾発、日本そしてアジアへ。')}</div>
           </div>
         </div>
       </div>

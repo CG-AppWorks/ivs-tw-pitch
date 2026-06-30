@@ -3,24 +3,25 @@
 // is populated with Japanese — the bilingual engine is unchanged so this stays
 // a faithful baseline you can re-point at a different event.
 const TEAMS = [
-  { id:"gntc", linkedin:"https://www.linkedin.com/in/james-chou-1b6374b8", order:1, name:"GNTC", sub:"Enterprise AI agents for non-engineers", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Kytu Lin", title:"Founder & CEO", email:"kytu@dcard.cc", website:"https://gntc.com/", speakerOrder:1,
+  { id:"gntc", linkedin:"https://www.linkedin.com/in/kytu800", order:1, name:"GNTC", sub:"Enterprise AI agents for non-engineers", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Kytu Lin", title:"Founder & CEO", email:"kytu@dcard.cc", website:"https://gntc.com/", speakerOrder:1,
     pitch:"Enterprise AI agent platform helping non-engineers deploy and manage AI in the workplace." },
-  { id:"raccoon", linkedin:"https://www.linkedin.com/in/kytu800", order:2, name:"Raccoon AI", sub:"Autonomous AI customer service", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"James Chou", title:"Co-Founder & CEO", email:"james@j-tcg.com", website:"https://www.raccoonai.co/", speakerOrder:2,
+  { id:"voiss", linkedin:"https://www.linkedin.com/in/voissfoundermax", order:2, name:"Voiss", sub:"AI voice platform for enterprises", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Max Tseng", title:"CEO & Founder", email:"max.tseng@voiss.cc", cc:"info@voiss.cc", website:"https://voiss.cc", speakerOrder:2,
+    pitch:"AI voice platform powering conversational brand characters and immersive simulations for enterprises." },
+  { id:"barkingdog", linkedin:"https://barkingdog.ai", order:3, name:"BarkingDog", sub:"No-code AI agents & virtual humans", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Guan-Wen Hsu (許冠文)", title:"Founder & CEO", email:"alex@barkingdog.ai", website:"https://barkingdog.ai", speakerOrder:3,
+    pitch:"No-code platform for building AI agents and virtual humans that automate enterprise customer service and training at scale." },
+  { id:"raccoon", linkedin:"https://www.linkedin.com/in/james-chou-1b6374b8", order:4, name:"Raccoon AI", sub:"Autonomous AI customer service", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"James Chou", title:"Co-Founder & CEO", email:"james@j-tcg.com", website:"https://www.raccoonai.co/", speakerOrder:4,
     pitch:"AI customer service agent that autonomously resolves 70%+ of e-commerce support tickets." },
-  { id:"luggagent", linkedin:"https://www.linkedin.com/in/lance-lin-ba2010b0", order:3, name:"Luggagent", sub:"Luggage-free travel platform", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Lance Lin", title:"CEO & Founder", email:"lance@luggagent.com", website:"https://www.luggagent.com", speakerOrder:3,
-    pitch:"LuggAgent helps travelers move without luggage and turns their free travel time into new revenue opportunities for airlines, hotels, and destinations." },
-  { id:"returnhelper", linkedin:"https://www.linkedin.com/in/roy-wan-624a1357", order:4, name:"ReturnHelper", sub:"Returns optimization for ecommerce", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Roy Wan", title:"Founder & CEO", email:"roy@returnhelper.com", website:"https://www.returnhelper.com/", speakerOrder:4,
-    pitch:"Optimising returns for global ecommerce merchants." },
   { id:"omnichat", linkedin:"https://www.linkedin.com/in/alan-ct-chan", order:5, name:"Omnichat", sub:"AI chat commerce platform", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Alan Chan", title:"Founder & CEO", email:"alan.chan@omnichat.ai", website:"https://www.omnichat.ai", speakerOrder:5,
     pitch:"Asia's only AI chat commerce platform certified by both Meta and LINE, turning every conversation into a transaction." },
   { id:"cake", linkedin:"https://www.linkedin.com/in/trantorliu", order:6, name:"Cake", sub:"AI copilot for careers & hiring", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Trantor Liu", title:"Founder & CEO", email:"trantor.liu@cakeresume.com", website:"https://www.cakeresume.com", speakerOrder:6,
     pitch:"AI Copilot for Careers and Hiring." },
-  { id:"voiss", linkedin:"https://www.linkedin.com/in/voissfoundermax", order:7, name:"Voiss", sub:"AI voice platform for enterprises", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Max Tseng", title:"CEO & Founder", email:"max.tseng@voiss.cc", website:"https://voiss.cc", speakerOrder:7,
-    pitch:"AI voice platform powering conversational brand characters and immersive simulations for enterprises." },
-  { id:"barkingdog", linkedin:"https://barkingdog.ai", order:8, name:"BarkingDog", sub:"No-code AI agents & virtual humans", tags:["AI","Enterprise"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Guan-Wen Hsu (許冠文)", title:"Founder & CEO", email:"alex@barkingdog.ai", website:"https://barkingdog.ai", speakerOrder:8,
-    pitch:"No-code platform for building AI agents and virtual humans that automate enterprise customer service and training at scale." },
-  { id:"kopherbit", linkedin:"https://kopherbit.com", order:9, name:"KopherBit", sub:"AI software for commercial EVs", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Yung Chen Wang", title:"Founder & CEO", email:"pc.lu@kopherbit.com", website:"https://kopherbit.com", speakerOrder:9,
+  { id:"returnhelper", linkedin:"https://www.linkedin.com/in/shumpei-shibata-0a06a32b/", order:7, name:"ReturnHelper", sub:"Returns optimization for ecommerce", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Shumpei Shibata", title:"GM of JP/KR", email:"shumpei.shibata@returnhelper.com", website:"https://www.returnhelper.com/", speakerOrder:7,
+    pitch:"Optimising returns for global ecommerce merchants." },
+  { id:"kopherbit", linkedin:"https://kopherbit.com", order:8, name:"KopherBit", sub:"AI software for commercial EVs", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Yung Chen Wang", title:"Founder & CEO", email:"pc.lu@kopherbit.com", website:"https://kopherbit.com", speakerOrder:8,
     pitch:"A Taiwan-born automotive software innovator, enabling commercial EV makers with AI-powered development platforms, vehicle control systems, and SDV-ready technologies." },
+  { id:"luggagent", linkedin:"https://www.linkedin.com/in/lance-lin-ba2010b0", order:9, name:"Luggagent", sub:"Luggage-free travel platform", tags:["AI","Mobility"], batch:"IVS", stage:"Pitching", market:"Taiwan", hq:"TW", language:"English", presenter:"Lance Lin", title:"CEO & Founder", email:"lance@luggagent.com", website:"https://www.luggagent.com", speakerOrder:9,
+    pitch:"LuggAgent helps travelers move without luggage and turns their free travel time into new revenue opportunities for airlines, hotels, and destinations." },
+
 ];
 
 const AGENDA = [
@@ -100,7 +101,7 @@ window.EVENT_CONFIG = {
   wordly: true,       // AI live interpretation
   album: false,        // live photo album — link only
   wistron: true,      // WA#10 cohort + partners section
-  keyVisual: true,    // IVS 2026 key visual banner (assets/ivs-hero.jpg)
+  keyVisual: true,    // IVS 2026 key visual banner
   nowOnStage: false,  // captions live in the floating widget, not an inline page strip
   heroDate: 'July 2nd',
   heroTime: 'Thu · 17:00–18:00',
@@ -108,9 +109,9 @@ window.EVENT_CONFIG = {
   heroVenueSub: 'Miyako Messe',
   heroTeamsNote: '15 AppWorks · 4 Wistron',
   // Live caption engine — server-side via the shared Cloudflare Worker (same
-  // API/keys as the previous edition). One operator triggers translation from
-  // the broadcaster page (/broadcast?lang=ja); guests just watch. The worker
-  // outputs EN + Japanese for this edition.
+  // API/keys as the AppWorks Demo Day edition). One operator triggers
+  // translation from the broadcaster page (/broadcast?lang=ja); guests watch.
+  // The worker outputs EN + Japanese for this edition.
   captionsWorker: 'https://ddtw-captions.hsichun.workers.dev',
-  captionsLang: 'ja',          // secondary caption language for the viewer
+  captionsLang: 'ja',
 };

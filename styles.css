@@ -184,7 +184,7 @@ body {
 .hero.photo .hero-meta .k { color: var(--aw-grey); }
 .hero.photo .hero-meta .v { color: var(--fg1); }
 .hero.photo .hero-meta .v small { color: var(--aw-grey); }
-.hero.photo .hero-meta .v .num { color: var(--accent); }
+.hero.photo .hero-meta .v .num { color: var(--fg1); }
 
 .hero .hero-inner {
   padding: 24px 0 72px;
@@ -2055,58 +2055,10 @@ footer.foot .nav-brand svg, footer.foot svg[aria-label="AppWorks"] { color: #fff
 
 
 /* ════════════════════════════════════════════════════════════════
-   TAIWAN IN MOTION — dark theme surface fixes
-   Targeted corrections layered after the light-theme rules above.
+   TAIWAN IN MOTION — light theme surface fixes
+   QR codes stay on true white so they remain scannable.
    ════════════════════════════════════════════════════════════════ */
-
-/* translucent dark nav glass (was opaque white) */
-.nav { background: rgba(10,14,21,0.82); border-bottom-color: var(--border); }
-.nav-burger { background: var(--surface-2); color: var(--fg1); }
-
-/* hero: dark cinematic surround for the full-bleed key visual */
-.hero.photo { background: var(--bg); color: var(--fg1); }
-.hero.photo .hero-bg { background: var(--bg); }
-.hero.photo .hero-bg::after { background: none; }
-.hero.photo .lede { color: rgba(255,255,255,0.84); }
-.hero.photo .lede b { color: #fff; }
-.hero.photo .lede.zh { color: rgba(255,255,255,0.60); }
-.hero.photo .hero-meta .k { color: var(--fg2); }
-.hero.photo .hero-meta .v small { color: var(--fg2); }
-
-/* small white indicator dots must stay white (they sit on orange) */
-.btn .live-dot,
-.stage-card .stage-photo .live-badge .dot,
-.team-card.live .pill .dot { background: #fff; }
-
-/* keep QR codes scannable — force true white behind the code image */
 .wordly-qr .qr-img,
 .caption-live-footer .qr-thumb,
 .album-cta-qr img,
 .album-meta .qr-block img { background: #fff; }
-
-/* selected filter chip = brand orange (reads clearly on dark) */
-.chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-.chip.on .dot { background: #fff; }
-
-/* secondary "dark" button -> readable elevated surface on a dark page */
-.btn.dark { background: var(--surface-2); border-color: var(--border-strong); color: var(--fg1); }
-.btn.dark:hover { background: #2A3543; border-color: var(--border-strong); }
-
-/* text that sits on an orange chip stays dark */
-.hero-guest-tag { color: #0A0E15; }
-.teams.editorial .team-card .cover .order-tag { color: #0A0E15; }
-
-/* current-agenda slot — orange highlight border */
-.slot.now { border-color: var(--accent); }
-
-/* event-partner + live-album surfaces */
-.ep-card { background: var(--surface); border-color: var(--border); }
-.album-play { background: var(--surface-2); color: var(--fg1); }
-.album-play:hover { background: #2A3543; }
-.album-play-hint { color: var(--fg2); }
-
-/* booth-map outlines visible on dark */
-.bm-stage { border-color: var(--border-strong); color: var(--fg1); }
-
-/* sponsor tile hover */
-.sponsors .sp:hover { background: var(--surface-2); color: var(--fg1); }
