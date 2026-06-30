@@ -387,7 +387,7 @@ function Footer({ language }) {
             <b>{tr(language, 'AW#33 is now taking applications!', ZH.footer.ctaTitle)}</b>
             <span>{tr(language, 'Join us — or refer a founder friend.', ZH.footer.ctaSub)}</span>
           </div>
-          <span className="foot-cta-btn">{tr(language, 'Apply / Refer', '申請 / 推薦')} <I.arrow/></span>
+          <span className="foot-cta-btn">{tr(language, 'Apply / Refer', '応募 / 紹介')} <I.arrow/></span>
         </a>
         <div className="foot-simple">
           <Logo height={26} />
