@@ -17,6 +17,24 @@ function useActiveCaptionSource(worker) {
   return active;
 }
 
+// Whether the live-translation UI (widget + launcher button) is shown on the
+// site. Backstage flips this server-side flag; every guest's page polls it, so
+// it toggles for everyone. Defaults to shown until the first poll resolves.
+function useCaptionsEnabled(worker) {
+  const [enabled, setEnabled] = useState(true);
+  useEffect(() => {
+    if (!worker || !/^https?:/.test(worker)) return;
+    let stop = false;
+    const poll = () => fetch(worker + '/api/visibility', { cache: 'no-store' })
+      .then((r) => r.json()).then((d) => { if (!stop) setEnabled(d.enabled !== false); }).catch(() => {});
+    poll();
+    const id = setInterval(poll, 5000);
+    return () => { stop = true; clearInterval(id); };
+  }, [worker]);
+  return enabled;
+}
+window.useCaptionsEnabled = useCaptionsEnabled;
+
 function LivePanel({ captionLanguage = 'en', onCaptionLanguageChange = () => {}, sessionId = 'DXRS-1194' }) {
   const [pane, setPane] = useState('chat');
   const [reactions, setReactions] = useState({ clap: 128, fire: 71, rocket: 54, idea: 42, heart: 33 });

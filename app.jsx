@@ -17,6 +17,8 @@ function App() {
   const CFG = window.EVENT_CONFIG || {};
   // English-only editions (e.g. Singapore) ignore the language toggle.
   const lang = CFG.bilingual === false ? 'en' : tweaks.language;
+  // Live-translation UI is shown/hidden site-wide via the Backstage toggle.
+  const captionsEnabled = useCaptionsEnabled(CFG.captionsWorker);
 
   // Operator-controlled live state (Backstage console). Persists to
   // localStorage; independent of the design-time Tweaks panel.
@@ -100,69 +102,17 @@ function App() {
       <Agenda language={lang}/>
       <About language={lang}/>
       <OrganizingPartners language={lang}/>
-      <CaptionsLauncher language={lang}/>
+      {captionsEnabled && <CaptionsLauncher language={lang}/>}
       <EventPartners language={lang}/>
       <Footer language={lang}/>
 
       <IntroModal team={introTeam} onClose={() => setIntroTeam(null)}/>
 
-      <LiveCaptionsWidget sessionId={sessionId} captionLanguage={captionLanguage}/>
+      {captionsEnabled && <LiveCaptionsWidget sessionId={sessionId} captionLanguage={captionLanguage}/>}
 
       <Backstage
         open={bkOpen}
-        onClose={() => setBkOpen(false)}
-        stage={stage}
-        setStage={setStage}
-        reset={resetStage}/>
-
-      <TweaksPanel title="Tweaks">
-        <TweakSection label="Hero"/>
-        <TweakRadio
-          label="Background"
-          value={tweaks.heroVariant}
-          options={[
-            { value:'slate',  label:'Slate' },
-            { value:'bone',   label:'Bone' },
-            { value:'orange', label:'Orange' },
-          ]}
-          onChange={(v) => setTweak('heroVariant', v)}/>
-        <TweakToggle
-          label="'Now on stage' takeover"
-          value={tweaks.showNowOnStage}
-          onChange={(v) => setTweak('showNowOnStage', v)}/>
-
-        <TweakSection label="Teams"/>
-        <TweakRadio
-          label="Card style"
-          value={tweaks.cardDensity}
-          options={[
-            { value:'compact',   label:'List' },
-            { value:'comfy',     label:'Cards' },
-            { value:'editorial', label:'Editorial' },
-          ]}
-          onChange={(v) => setTweak('cardDensity', v)}/>
-
-        <TweakSection label="Brand"/>
-        <TweakRadio
-          label="Accent intensity"
-          value={tweaks.accentIntensity}
-          options={[
-            { value:'restrained', label:'Quiet' },
-            { value:'balanced',   label:'Balanced' },
-            { value:'expressive', label:'Bold' },
-          ]}
-          onChange={(v) => setTweak('accentIntensity', v)}/>
-        {CFG.bilingual !== false && (
-        <TweakRadio
-          label="Language"
-          value={tweaks.language}
-          options={[
-            { value:'zh',   label:'日本語' },
-            { value:'en',   label:'EN' },
-          ]}
-          onChange={(v) => setTweak('language', v)}/>
-        )}
-      </TweaksPanel>
+        onClose={() => setBkOpen(false)}/>
     </div>
   );
 }

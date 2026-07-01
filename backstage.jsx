@@ -49,17 +49,19 @@ function useBackstageToggle() {
 }
 window.useBackstageToggle = useBackstageToggle;
 
-const BK_PHASES = [
-  { value: 'before',   label: 'Before' },
-  { value: 'live',     label: 'Live' },
-  { value: 'break',    label: 'Break' },
-  { value: 'cocktail', label: 'Cocktail' },
-];
-
-function Backstage({ open, onClose, stage, setStage, reset }) {
+// Backstage = password-gated control for the live-translation UI only.
+// Password "ilovetaiwan" unlocks a single Shown/Hidden toggle that flips a
+// server-side flag on the captions Worker, so it shows/hides the caption
+// widget + launcher button for ALL guests.
+function Backstage({ open, onClose }) {
   if (!open) return null;
-  const teams = window.TEAMS || [];
-  const sessionValid = /^[A-Za-z]{4}-?\d{4}$/.test((stage.sessionId || '').trim());
+  const worker = (window.EVENT_CONFIG && window.EVENT_CONFIG.captionsWorker) || '';
+
+  const [pass, setPass] = useBkState('');
+  const [unlocked, setUnlocked] = useBkState(false);
+  const [enabled, setEnabled] = useBkState(null); // null = loading
+  const [busy, setBusy] = useBkState(false);
+  const [err, setErr] = useBkState('');
 
   // Close on Escape.
   useBkEffect(() => {
@@ -68,77 +70,76 @@ function Backstage({ open, onClose, stage, setStage, reset }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  const joinUrl = `https://attend.wordly.ai/join/${(stage.sessionId || '').trim() || 'XXXX-0000'}`;
+  // Load current visibility once unlocked.
+  useBkEffect(() => {
+    if (!unlocked || !worker) return;
+    let stop = false;
+    fetch(worker + '/api/visibility', { cache: 'no-store' })
+      .then((r) => r.json()).then((d) => { if (!stop) setEnabled(d.enabled !== false); })
+      .catch(() => { if (!stop) setEnabled(true); });
+    return () => { stop = true; };
+  }, [unlocked, worker]);
+
+  const unlock = () => {
+    if (pass === 'ilovetaiwan') { setUnlocked(true); setErr(''); }
+    else setErr('Wrong password.');
+  };
+
+  const setVisibility = (next) => {
+    if (!worker) return;
+    setBusy(true); setErr('');
+    fetch(worker + '/api/visibility', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ilovetaiwan' },
+      body: JSON.stringify({ enabled: next }),
+    })
+      .then((r) => r.json()).then((d) => { setEnabled(d.enabled !== false); setBusy(false); })
+      .catch(() => { setErr('Update failed — check the connection.'); setBusy(false); });
+  };
 
   return (
-    <div className="bk-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-label="Backstage operator console">
+    <div className="bk-backdrop" onClick={onClose} role="dialog" aria-modal="true" aria-label="Backstage">
       <div className="bk-panel" onClick={(e) => e.stopPropagation()}>
         <div className="bk-head">
           <div className="bk-title">
             <span className="bk-dot" />
             Backstage
-            <span className="bk-sub">operator console</span>
+            <span className="bk-sub">live translation</span>
           </div>
           <button className="bk-close" onClick={onClose} aria-label="Close">×</button>
         </div>
 
         <div className="bk-body">
-          {/* ─ Event phase ─ */}
-          <div className="bk-section">
-            <label className="bk-label">Event phase <span className="bk-muted">— what the room is doing now</span></label>
-            <div className="bk-seg">
-              {BK_PHASES.map((p) =>
-                <button key={p.value}
-                  className={stage.phase === p.value ? 'on' : ''}
-                  onClick={() => setStage('phase', p.value)}>{p.label}</button>
-              )}
+          {!unlocked ?
+            <div className="bk-section">
+              <label className="bk-label">Password</label>
+              <input className="bk-input mono" type="password" value={pass} placeholder="••••••••"
+                autoFocus
+                onChange={(e) => setPass(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && unlock()} />
+              {err && <div className="bk-hint"><span className="warn">{err}</span></div>}
+              <div style={{ height: 10 }} />
+              <button className="bk-btn primary" onClick={unlock}>Unlock</button>
             </div>
-          </div>
-
-          {/* ─ Now on stage ─ */}
-          <div className="bk-section">
-            <label className="bk-label">Now on stage <span className="bk-muted">— highlights the live team's card</span></label>
-            <select
-              className="bk-input"
-              value={stage.liveTeamId || 'OFF_AIR'}
-              disabled={stage.phase !== 'live'}
-              onChange={(e) => setStage('liveTeamId', e.target.value)}>
-              <option value="OFF_AIR">— Off air —</option>
-              {teams.map((t) =>
-                <option key={t.id} value={t.id}>
-                  {String(t.speakerOrder).padStart(2, '0')} · {t.name} ({t.batch})
-                </option>
-              )}
-            </select>
-            <div className="bk-hint">
-              {stage.phase === 'live'
-                ? <>Pick the team currently pitching, or <b>Off air</b> between pitches.</>
-                : <span className="warn">Set phase to <b>Live</b> to spotlight a team.</span>}
+          :
+            <div className="bk-section">
+              <label className="bk-label">Live translation <span className="bk-muted">— show / hide on the site for all guests</span></label>
+              <div className="bk-seg">
+                <button className={enabled === true ? 'on' : ''} disabled={busy || enabled === null} onClick={() => setVisibility(true)}>Shown</button>
+                <button className={enabled === false ? 'on' : ''} disabled={busy || enabled === null} onClick={() => setVisibility(false)}>Hidden</button>
+              </div>
+              <div className="bk-hint">
+                {enabled === null ? 'Loading…'
+                  : enabled ? 'The captions button + popup are visible to everyone.'
+                  : 'The captions button + popup are hidden for everyone.'}
+                {busy ? ' · saving…' : ''}
+              </div>
+              {err && <div className="bk-hint"><span className="warn">{err}</span></div>}
             </div>
-          </div>
-
-          {/* ─ Captions session ─ */}
-          <div className="bk-section">
-            <label className="bk-label">Captions session ID <span className="bk-muted">— Wordly LLLL-NNNN</span></label>
-            <div className="bk-id-row">
-              <input
-                className={`bk-input mono ${stage.sessionId && !sessionValid ? 'warn' : ''}`}
-                value={stage.sessionId || ''}
-                placeholder="DXRS-1194"
-                onChange={(e) => setStage('sessionId', e.target.value.toUpperCase())} />
-            </div>
-            <div className="bk-live">
-              <span className="k">Live:</span>
-              <code>{(stage.sessionId || '').trim() || '— none —'}</code>
-              <a className="bk-open" href={joinUrl} target="_blank" rel="noopener">Open join page ↗</a>
-            </div>
-            {stage.sessionId && !sessionValid &&
-              <div className="bk-hint"><span className="warn">Format looks off — expected 4 letters + 4 digits.</span></div>}
-          </div>
+          }
         </div>
 
         <div className="bk-foot">
-          <button className="bk-btn ghost" onClick={reset}>Reset to defaults</button>
           <button className="bk-btn primary" onClick={onClose}>Done</button>
         </div>
       </div>
